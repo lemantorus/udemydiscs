@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Card</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <button class="addBtn">Add</button>
+    <div class="cards-wrapper">
+        <div class="card">
+            <img src="https://img-c.udemycdn.com/course/750x422/4339782_ca13_7.jpg" alt="Product Image">
+            <div class="card-content">
+                <div class="card-title">JavaScript: Desde cero con NodeJS</div>
+                <div class="card-info"><i class="fas fa-tags"></i>Development</div>
+                <div class="card-info"><i class="fas fa-language"></i>Spanish</div>
+                <div class="card-info"><i class="fas fa-star"></i>Rating: 0.00</div>
+                <div class="card-info"><i class="fas fa-film"></i>12 Lectures</div>
+                <div class="card-info"><i class="fas fa-user-graduate"></i>8107 Students</div>
+                <div class="card-info"><i class="fas fa-calendar-alt"></i>Sale ends: 2024-11-16</div>
+                <div class="card-price">
+                    <del>$69.99</del>
+                    <span>$0.00</span>
+                </div>
+                <a href="https://www.udemy.com/course/javascript-desde-cero-con-nodejs/?couponCode=BLACKFRIDAY-2024" class="card-button">Go to Course</a>
+            </div>
+        </div>
+    </div>
+<script>
+    function addCoupons(data){
+            for (let i=0;i<data.length;i++){
+                console.log(data[i])
+            }
+        }
+    function getData(){
+            fetch(`api.php?offset=${offset}`,{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `offset=${offset}`
+            }).then(response => {
+                console.log('res')
+                return response.json()
+            }).then(response=>{
+                addCoupons(response)
+            })
+        }
+    let buttonAdd = document.querySelector('.addBtn')
+    buttonAdd.addEventListener('click',()=>{
+        console.log('a')
+        getData()
+    })
+</script>
+</body>
+</html>
