@@ -82,15 +82,14 @@ function addCoupons(data){
             cardsWrapper.innerHTML += content
         }
     }
-function getData(){
-    if (formGenerated==false){
-}
-        return fetch(`api.php?offset=${offset}`,{
+function getData(firsttime){
+    endpoint = firsttime?'api.php':'search.php'
+        return fetch(`${endpoint}?offset=${offset}`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
-            body: `offset=${offset}`
+            body: getRequestBody()
         }).then(response => {
             return response.json()
         }).then(response=>{
@@ -108,15 +107,15 @@ window.addEventListener('scroll',()=>{
         window.innerHeight+window.scrollY>=document.body.offsetHeight*.95&&canLoad===true
     ){
         canLoad=false
-        getData()
+        getData(false)
     }
 })
 rf.addEventListener('input',()=>checkRating())
 rs.addEventListener('input',()=>checkRating())
 sendForm.addEventListener('click',(e)=>{
     e.preventDefault()
-    let reqBodyData = JSON.stringify(getRequestBody())
-    fetch('search.php',{
+    offset= 0
+    fetch(`search.php?offset=${offset}`,{
         method:'POST',
         headers:{'Content-Type':"application/json"},
         body:getRequestBody()
@@ -125,7 +124,7 @@ sendForm.addEventListener('click',(e)=>{
     })
 })
 document.addEventListener('DOMContentLoaded',()=>{
-    getData()
+    getData(true)
     setupForm()
 
     })
