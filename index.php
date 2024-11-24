@@ -9,6 +9,16 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
+<header class="header">
+    <div class="logo"><a href="#">Logo</a></div>
+    <button class="menu-toggle">☰</button>
+    <nav class="nav">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Service</a>
+        <a href="#contact">Contacts</a>
+    </nav>
+</header>
     <div id="mainWrapper">
     <form action="search.php" id="searchingForm" method="POST">
         <div class="form-searchQ-wrapper">

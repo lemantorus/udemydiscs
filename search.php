@@ -40,7 +40,6 @@
             $rd = conditionsGet();
             $langlist = $rd['languages'];
             if(count($langlist)>0) {
-                $offset = $_GET['offset']??0;
                 $placeholders = implode(',',array_fill(0,count($langlist),"?"));
                 $query = "SELECT * FROM coupons WHERE category LIKE ? AND rating BETWEEN ? AND ? AND name LIKE ? AND language IN ($placeholders) LIMIT 10 OFFSET ? ";
 
@@ -57,6 +56,7 @@
                 '%'.$rd['query'].'%'
             ];
             $params = array_merge($params,$langlist);
+            $offset = $_GET['offset']??0;
             $params[]=$offset;
             $types = "sdds" . implode('', array_fill(0, count($langlist), "s"))."i";
 
@@ -66,7 +66,10 @@
             
             $data = [];
             while ($row = $result->fetch_assoc()) {
-                $data['data'] = $row;
+                $data['data'][] = $row;
+            }
+            if(count($data)==0){
+                $data['data'] = [];
             }
             echo json_encode($data);
             $conn->close();
