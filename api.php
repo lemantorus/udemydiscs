@@ -35,6 +35,19 @@
         $data['languages']=getUniqValuesFromCol($conn,'language');
         $data['categories']=getUniqValuesFromCol($conn,'category');
 
+        if($_GET['amount']){
+        $countQuery = "SELECT COUNT(*) FROM coupons";
+        $countResult = $conn->prepare($countQuery);
+        $countResult->execute();
+        $countResult->bind_result($amount);
+        $countResult->fetch();
+        $countResult->close();
+        $data['total']=$amount;
+        }
+        else{
+            $data['total']='';
+        };
+
         echo json_encode($data);}
         $conn->close();
 

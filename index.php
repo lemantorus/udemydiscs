@@ -45,6 +45,7 @@
     </form>
     <div class="sorting-wrapper">
     </div>
+    <div class="results-amount"><p></p></div>
     <div class="cards-wrapper">
        </div>
     </div>
